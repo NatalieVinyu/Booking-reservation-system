@@ -1,17 +1,16 @@
 const express = require('express');
 const app = express();
-const path = require('path')
+const path = require('path');
+const cors = require('cors');
 
 //MIDDLEWARE
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //ROUTES
 const bookingsRoutes = require('./routes/bookings');
 app.use('/api/bookings', bookingsRoutes);
-
-//SERVE HTML USING EXPRESS
-app.use(express.static(path.join(__dirname, 'public')))
 
 //TEST ROUTES
 app.post('/data', (req, res) => {
