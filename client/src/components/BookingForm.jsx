@@ -40,8 +40,6 @@ function BookingForm({ resource, date, selectedTime, onSuccess }) {
       return alert(data.message || "Booking failed");
     }
 
-    alert(data.message);
-
     // RESET FORM
     setName("");
     setEmail("");
@@ -49,6 +47,8 @@ function BookingForm({ resource, date, selectedTime, onSuccess }) {
     //NOTIFY PARENT (REFRESH SLOTS, CLEAR SELECTION)
     if (onSuccess) onSuccess();
 
+    alert(data.message);
+    
   } catch (error) {
     console.error(error);
     alert("Server error");
@@ -56,24 +56,24 @@ function BookingForm({ resource, date, selectedTime, onSuccess }) {
   };
 
   return (
-    <div className='mt-4'>
+    <div className='space-y-3'>
       <input 
         placeholder='Your Name'
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className='w-full p-2 border mb-2' />
+        className='w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400' />
 
       <input 
-        placeholder='Email'
+        placeholder='Email Address'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className='w-full p-2 border mb-2' />
+        className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400' />
 
       <button 
         onClick={handleBooking}
         disabled={!name || !email}
-        className='w-full bg-green-600 text-white p-2 disabled:bg-gray-400'>
-          Book Appointment at {selectedTime}
+        className='w-full bg-green-600 text-white p-3 rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400'>
+          Confirm Booking
       </button>
     </div>
   )

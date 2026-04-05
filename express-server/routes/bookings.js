@@ -32,19 +32,19 @@ router.post('/', (req, res) => {
 
   //VALIDATE THE INPUT
   if (!resource || !date || !startTime || !endTime || !name || !email) {
-    return res.status(400).json('All fields are required');
+    return res.status(400).json({ message: 'All fields are required' });
   }
 
   //CHECK FOR CONFLICTS
-  const conflict = store.bookings.find(booking =>
-    booking.resource === resource &&
-    booking.date === date &&
-    startTime < booking.endTime && 
-    endTime > booking.startTime
+  const conflict = store.bookings.find(b =>
+    b.resource === resource &&
+    b.date === date &&
+    startTime < b.endTime && 
+    endTime > b.startTime
   );
 
   if (conflict) {
-    return res.status(400).json('Time slot already booked')
+    return res.status(400).json({ message: 'Time slot already booked'})
   }
 
   //CREATE BOOKING
@@ -86,7 +86,7 @@ router.get('/:date/:resource', (req, res) => {
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
 
-  const index = store.bookings.findIndex(b => b.id === req.params.id);
+  const index = store.bookings.findIndex(b => b.id === id);
 
   if (index === -1) 
     return res.status(404).json({ message: 'Booking not found' });

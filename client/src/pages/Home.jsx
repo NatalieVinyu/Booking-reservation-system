@@ -12,7 +12,7 @@ const URL = "/api/bookings";
 function Home() {
   const [resource, setResource] = useState("Dr. Smith");
   const [date, setDate] = useState("");
-  const [slots, setSlots] = useState([]);
+  const [slots, setSlots] = useState([null]);
   const [selectedTime, setSelectedTime] = useState("");
   const [refreshKey, setRefreshKey] = useState(0);
 
@@ -42,65 +42,92 @@ function Home() {
 
     } catch (error) {
       console.error("FETCH ERROR:", error);
-      setSlots([]);
+      setSlots([null]);
       alert('Failed to load slots')
     }
   };
 
   return (
-    <div className='p-6 max-w-xl mx-auto bg-white shadow rounded'>
-      <h1 className='text-2xl font-bold mb-4'>Vet Appointment Booking</h1>
+    <div className='min-h-screen bg-gray-100 p-6'>
+      <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6'>
 
-      {/* RESOURCE SELECTOR */}
-      <ResourceSelector 
-        resource={resource}
-        setResource={setResource} 
-        clearSlots={() => {
-          setSlots([]);
-          setSelectedTime("");
-        }}
-        />
+      <div className='md:col-span-2 bg-white shadow-xl rounded-2xl p-6'>
+        <h1 className='text-2xl font-bold mb-6'>Vet Appointment Booking</h1>
 
-      {/* DATE PICKER */}
-      <DatePicker
-        date={date}
-        setDate={setDate}
-        clearSlots={() => {
-          setSlots([]);
-          setSelectedTime("");
-        }}
-        />
-
-      {/* FETCH SLOTS 
-      <button 
-        onClick={fetchSlots} 
-        className='w-full bg-blue-500 text-white p-2 mb-4'>
-          Check Availability
-      </button>*/}
-
-      {/* SLOTS */}
-      <Slots
-        slots={slots}
-        selectedTime={selectedTime}
-        setSelectedTime={setSelectedTime}
-        date={date} 
-      />
-
-      {selectedTime && (
-        <BookingForm 
+      <div className='mb-6 bg-gray-100 p-4 rounded-xl'>
+        <h2 className='font-semibold mb-2'>1. Select Vet</h2>
+      
+        {/* RESOURCE SELECTOR */}
+        <ResourceSelector 
           resource={resource}
-          date={date}
-          selectedTime={selectedTime}
-          onSuccess={() => {
-            fetchSlots();
+          setResource={setResource} 
+          clearSlots={() => {
+            setSlots([]);
             setSelectedTime("");
-            setRefreshKey(k => k + 1)
           }}
+          />
+      </div>
+        
+      <div className='mb-6 bg-gray-100 p-4 rounded-xl'>
+        <h2 className='font-semibold mb-2'>2. Select Date</h2>
+
+        {/* DATE PICKER */}
+        <DatePicker
+          date={date}
+          setDate={setDate}
+          clearSlots={() => {
+            setSlots([]);
+            setSelectedTime("");
+          }}
+          />
+      </div>
+        
+      <div className='mb-6 bg-gray-100 p-4 rounded-xl'>
+        <h2 className='font-semibold mb-2'>3. Available Time</h2>
+
+        {/* SLOTS */}
+        <Slots
+          slots={slots}
+          selectedTime={selectedTime}
+          setSelectedTime={setSelectedTime}
+          date={date} 
         />
-      )}
+      </div>
+        
+        {selectedTime && (
+          <div className='border-t pt-6'>
+            <h2 className='font-semibold mb-2'>4. Your Details</h2>
 
-      <BookingList refreshKey={refreshKey} />
+            <BookingForm 
+              resource={resource}
+              date={date}
+              selectedTime={selectedTime}
+              onSuccess={() => {
+                setSelectedTime("");
+                setDate("");
+                setResource("Dr.Smith");
+                setRefreshKey(k => k + 1)
+                
+                //RESET SLOTS PROPERLY
+                setSlots(null)
 
+                //REFRESH BOOKINGS LIST
+                setRefreshKey(k => k + 1);
+              }}
+            />
+          </div>
+        )}
+
+      </div>
+      
+      {/* BOOKING LIST */}
+      <div className='bg-white shadow-xl rounded-2xl p-6 h-fit'>
+
+        <h2 className='text-xl font-bold mb-4'>Your Bookings</h2>
+        <BookingList refreshKey={refreshKey} />
+      </div>
+
+     </div>
     </div>
   );
 }
