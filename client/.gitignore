@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# .gitignore (root)
+node_modules/
+client/node_modules/
+express-server/node_modules/

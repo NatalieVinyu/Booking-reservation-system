@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from "react";
 
 // BACKEND API ENDPOINT
-const URL = "/api/bookings";
+const URL = "https://booking-reservation-system-an1k.onrender.com/api/bookings";
 
 // HELPER FUNCTION TO ADD 30 MINUTES TO SELECTED TIME
 const add30Minutes = (time) => {
