@@ -9,7 +9,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "vite preview"
+    "start": "vite preview",
+    "build": "cd client && npm install && npm run build"
   },
   "dependencies": {
     "react": "^19.2.4",
