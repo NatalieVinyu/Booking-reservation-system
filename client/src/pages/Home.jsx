@@ -48,44 +48,41 @@ function Home() {
   };
 
   return (
-    <div className='min-h-screen bg-gray-100 p-6'>
+    <div className='min-h-screen bg-gray-50 p-6'>
       <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6'>
 
       <div className='md:col-span-2 bg-white shadow-xl rounded-2xl p-6'>
-        <h1 className='text-2xl font-bold mb-6'>Vet Appointment Booking</h1>
+        <h1 className='text-2xl font-bold mb-6'>CareFirst Veterinary Appointment Booking</h1>
 
-      <div className='mb-6 bg-gray-100 p-4 rounded-xl'>
-        <h2 className='font-semibold mb-2'>1. Select Vet</h2>
-      
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         {/* RESOURCE SELECTOR */}
-        <ResourceSelector 
-          resource={resource}
-          setResource={setResource} 
-          clearSlots={() => {
-            setSlots([]);
-            setSelectedTime("");
-          }}
+        <div className='mb-6 bg-gray-50 p-4 rounded-xl'>
+          <ResourceSelector 
+            resource={resource}
+            setResource={setResource} 
+            clearSlots={() => {
+              setSlots([]);
+              setSelectedTime("");
+            }}
           />
-      </div>
+        </div>
         
-      <div className='mb-6 bg-gray-100 p-4 rounded-xl'>
-        <h2 className='font-semibold mb-2'>2. Select Date</h2>
-
         {/* DATE PICKER */}
-        <DatePicker
-          date={date}
-          setDate={setDate}
-          clearSlots={() => {
-            setSlots([]);
-            setSelectedTime("");
-          }}
+        <div className='mb-6 bg-gray-50 p-4 rounded-xl'>
+          <DatePicker
+            date={date}
+            setDate={setDate}
+            clearSlots={() => {
+              setSlots([]);
+              setSelectedTime("");
+            }}
           />
+        </div>
       </div>
-        
-      <div className='mb-6 bg-gray-100 p-4 rounded-xl'>
-        <h2 className='font-semibold mb-2'>3. Available Time</h2>
-
+      
         {/* SLOTS */}
+      <div className='mb-6 bg-gray-50 p-4 rounded-xl'>
+        <h2 className='font-semibold mb-2'>Available Slots</h2>
         <Slots
           slots={slots}
           selectedTime={selectedTime}
@@ -94,9 +91,10 @@ function Home() {
         />
       </div>
         
+        {/* BOOKING FORM */}
         {selectedTime && (
-          <div className='border-t pt-6'>
-            <h2 className='font-semibold mb-2'>4. Your Details</h2>
+          <div className='border-t border-gray-300 pt-6'>
+            <h2 className='font-semibold mb-2'>Your Details</h2>
 
             <BookingForm 
               resource={resource}

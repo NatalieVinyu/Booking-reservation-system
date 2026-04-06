@@ -10,7 +10,7 @@ function Slots({ slots, selectedTime, setSelectedTime, date }) {
     <div className='mb-6'>
 
       {/* STATUS TEXT ONLY */}
-      {!date && <p className='text-gray-400 mb-2'>Select a date</p>}
+      {!date && <p className='text-gray-400 mb-2'>Select available slot</p>}
       {isLoading && <p className='text-gray-400 mb-2'>Loading..</p>}
       {date && Array.isArray(slots) && slots.length === 0 && (
         <p className='text-gray-500 mb-2'>No slots available</p>
@@ -27,7 +27,7 @@ function Slots({ slots, selectedTime, setSelectedTime, date }) {
               key={slot}
               disabled={isDisabled}
               onClick={() => setSelectedTime(slot)}
-              className={`p-3 border rounded-lg ${selectedTime === slot ? "bg-blue-600 text-white" : ""} ${isDisabled ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "hover:bg-gray-100"}`}>
+              className={`p-3 bg-white border rounded-lg border-none ${selectedTime === slot ? "bg-blue-700 text-black" : ""} ${isDisabled ? "bg-gray-100 text-gray-400 cursor-not-allowed" : "hover:bg-blue-600"}`}>
                 {slot}
               </button>
           )

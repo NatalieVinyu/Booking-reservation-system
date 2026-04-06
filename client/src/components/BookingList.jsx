@@ -45,20 +45,20 @@ function BookingList({ refreshKey }) {
 
   return (
     <div className='mt-6'>
-      <h2 className='text-xl font-bold mb-3'>Bookings</h2>
+      <h2 className='text-xl mb-3'>Bookings</h2>
 
       <div className='space-y-3'>
         {bookings.length === 0 && (<p>No bookings yet</p>)}
 
         {bookings.map((booking) => (
-        <div key={booking.id} className='border p-3 mb-2 flex justify-between items-center'>
+        <div key={booking.id} className='border rounded-xl border-gray-400 p-3 mb-2 flex justify-between items-center'>
           <div>
             <p><strong>{booking.resource}</strong></p>
-            <p>{booking.date} at {booking.startTime}</p>
+            <p className='text-gray-400'>{booking.date} at {booking.startTime}</p>
             <p>{booking.name}</p>
           </div>
 
-          <button onClick={() => handleDelete(booking.id)} className='bg-red-500 text-white px-3 py-1'>Delete</button>
+          <button onClick={() => handleDelete(booking.id)} className='bg-red-500 rounded-xl text-white px-3 py-1'>Delete</button>
         </div>
         ))}
       </div>

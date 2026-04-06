@@ -28,14 +28,14 @@ function DatePicker({ date, setDate, clearSlots }) {
 
   return (
     <div className='mb-3'>
-      <label className='block mb-1 font-medium'>Select Date</label>
+      <label className='block mb-4 font-medium'>Select Date</label>
 
       <input 
         type="date"
         min={today}
         value={date}
         onChange={handleChange}
-        className='w-full p-2 border rounded' />
+        className='w-full p-2 bg-white border border-gray-300 rounded text-gray-500 outline-none' />
     </div>
   );
 }

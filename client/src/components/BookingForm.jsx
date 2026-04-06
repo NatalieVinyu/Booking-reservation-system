@@ -58,21 +58,21 @@ function BookingForm({ resource, date, selectedTime, onSuccess }) {
   return (
     <div className='space-y-3'>
       <input 
-        placeholder='Your Name'
+        placeholder='Full Name and Surname'
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className='w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400' />
+        className='w-full p-3 border rounded-xl border-gray-400 outline-none focus:ring-2 focus:ring-blue-400' />
 
       <input 
         placeholder='Email Address'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className='w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400' />
+        className='w-full p-3 border rounded-xl border-gray-400 outline-none focus:ring-2 focus:ring-blue-400' />
 
       <button 
         onClick={handleBooking}
         disabled={!name || !email}
-        className='w-full bg-green-600 text-white p-3 rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400'>
+        className='w-full p-3 border border-gray-400 bg-gray-100 rounded-lg hover:bg-green-600 hover:text-white transition disabled:bg-gray-400'>
           Confirm Booking
       </button>
     </div>
