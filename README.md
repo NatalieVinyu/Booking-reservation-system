@@ -11,7 +11,7 @@ Full-stack booking and reservation system with a React + Tailwind front end and 
 * **Booking List** - Real time list of all bookings with delete functionality.
 * **Conflict Detection** - Prevent double-booking of the same slot.
 * **Responsive UI** - Modern layout inspired by Calendly.
-* **Vite + React** - Fast and modular forntend.
+* **Vite + React** - Fast and modular frontend.
 
 ---
 
@@ -31,42 +31,69 @@ Full-stack booking and reservation system with a React + Tailwind front end and 
 
 ---
 
+## Project Structure
+ 
+```
+Booking-reservation-system/
+├── client/                     # React frontend
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── BookingForm.jsx
+│   │   │   ├── BookingList.jsx
+│   │   │   ├── DatePicker.jsx
+│   │   │   ├── ResourceSelector.jsx
+│   │   │   └── Slots.jsx
+│   │   ├── pages/
+│   │   │   └── Home.jsx
+│   │   ├── services/
+│   │   │   └── api.js
+│   │   └── App.jsx
+│   ├── vite.config.js
+│   └── package.json
+│
+└── express-server/             # Node.js backend
+    ├── data/
+    │   └── store.js            # In-memory booking store
+    ├── routes/
+    │   └── bookings.js         # API route handlers
+    ├── server.js
+    └── package.json
+```
+
 ## Setup
 ### Backend
 
-* 1. Navigate to backend folder:
+* 1. **Navigate to backend folder:**
 
 ```bash
 cd express-server
+```
 
-* 2. Install dependencies:
-
+* 2. **Install dependencies:**
 ```bash
 npm install
+```
 
-* 3. Start server:
-
+* 3. **Start the backend server:**
 ```bash
 node server.js
+```
 
 ### Frontend
 
-* 1. Navigate to frontend folder:
-
+* 1. **Navigate to the forntend folder:**
 ```bash
 cd vite-react-app
+```
 
-* 2. Install dependencies:
-
+* 2. **Install dependencies:**
 ```bash
 npm install
+```
 
-* 3. Start development server:
-
+* 3. **Start the frontend server:**
 ```bash
 npm run dev
-
-
-
+```
 
 
