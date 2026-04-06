@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 
 //BACKEND API ENDPOINT
-const URL = "https://booking-reservation-system-an1k.onrender.com/api/bookings";
+const URL = "/api/bookings";
 
 function BookingList({ refreshKey }) {
   //FETCH BOOKING WHEN COMPONENT WHEN COMPONENT MOUNTS OR refreshKey CHANGES
