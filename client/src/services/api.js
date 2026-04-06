@@ -1,5 +1,5 @@
 // SERVICES/API.JS
-const URL = "https://booking-reservation-system-an1k.onrender.com/api/bookings";
+const URL = process.env.REACT_APP_API_URL || "https://booking-reservation-system-an1k.onrender.com/api/bookings";
 
 export default URL
 
