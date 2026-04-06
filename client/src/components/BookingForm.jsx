@@ -1,8 +1,10 @@
 import React from 'react';
 import { useState } from "react";
 
+// BACKEND API ENDPOINT
 const URL = "/api/bookings";
 
+// HELPER FUNCTION TO ADD 30 MINUTES TO SELECTED TIME
 const add30Minutes = (time) => {
     const [hour, min] = time.split(":").map(Number);
     const date = new Date();
@@ -11,14 +13,16 @@ const add30Minutes = (time) => {
   };
 
 function BookingForm({ resource, date, selectedTime, onSuccess }) {
+  // STATE FOR USER INPUT
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  //CREATE BOOKING
+  // HANDLE BOOKING SUBMISSION
   const handleBooking = async () => {
   if (!selectedTime) return alert("Select a time slot");
 
   try {
+    // SEND POST REQUEST TO BACKEND
     const res = await fetch(URL, {
       method: "POST",
       headers: {
@@ -36,17 +40,19 @@ function BookingForm({ resource, date, selectedTime, onSuccess }) {
 
     const data = await res.json();
 
+    // HANDLE SERVER ERRORS
     if (!res.ok) {
       return alert(data.message || "Booking failed");
     }
 
-    // RESET FORM
+    // RESET FORM INPUTS
     setName("");
     setEmail("");
 
-    //NOTIFY PARENT (REFRESH SLOTS, CLEAR SELECTION)
+    // NOTIFY PARENT COMPONENT (REFRESH SLOTS, CLEAR SELECTION)
     if (onSuccess) onSuccess();
 
+    // CONFIRM SUCCESS
     alert(data.message);
     
   } catch (error) {
@@ -57,21 +63,24 @@ function BookingForm({ resource, date, selectedTime, onSuccess }) {
 
   return (
     <div className='space-y-3'>
+      {/* NAME INPUT */}
       <input 
         placeholder='Full Name and Surname'
         value={name}
         onChange={(e) => setName(e.target.value)}
         className='w-full p-3 border rounded-xl border-gray-400 outline-none focus:ring-2 focus:ring-blue-400' />
 
+      {/* EMAIL INPUT */}
       <input 
         placeholder='Email Address'
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         className='w-full p-3 border rounded-xl border-gray-400 outline-none focus:ring-2 focus:ring-blue-400' />
 
+      {/* CONFIRM BOOKING BUTTON */}
       <button 
         onClick={handleBooking}
-        disabled={!name || !email}
+        disabled={!name || !email} // DISABLE UNTIL BOTH FIELDS ARE FILLED
         className='w-full p-3 border border-gray-400 bg-gray-100 rounded-lg hover:bg-green-600 hover:text-white transition disabled:bg-gray-400'>
           Confirm Booking
       </button>

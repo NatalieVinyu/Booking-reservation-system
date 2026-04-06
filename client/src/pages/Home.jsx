@@ -7,24 +7,28 @@ import DatePicker from '../components/DatePicker';
 import ResourceSelector from '../components/ResourceSelector';
 import Slots from '../components/Slots';
 
+//BASE API ENDPOINT FOR BOOKINGS
 const URL = "/api/bookings";
 
 function Home() {
-  const [resource, setResource] = useState("Dr. Smith");
-  const [date, setDate] = useState("");
-  const [slots, setSlots] = useState([null]);
-  const [selectedTime, setSelectedTime] = useState("");
-  const [refreshKey, setRefreshKey] = useState(0);
+  // STATE MANAGEMENT - STORES USER SELECTIONS AND DATA
+  const [resource, setResource] = useState("Dr. Smith"); //SELECTED DOCTOR/RESOURCE
+  const [date, setDate] = useState(""); //SELECTED DATE
+  const [slots, setSlots] = useState([null]); //AVAILABLE TIME SLOTS
+  const [selectedTime, setSelectedTime] = useState(""); //CHOSEN TIME SLOT
+  const [refreshKey, setRefreshKey] = useState(0); //TRIGGERS REFRESH OF BOOKING LIST
 
+  //RUNS WHEN DATE OR RESOURCE CHANGES
   useEffect(() => {
-    if (date) fetchSlots();
+    if (date) fetchSlots(); // FETCH NEW SLOTS WHEN USER SELECTS DATE/RESOURCE
   }, [date, resource]);
 
-  //FETCH AVAILABLE SLOTS
+  //FETCH AVAILABLE SLOTS FROM BACKEND
   const fetchSlots = async () => {
-    if (!date) return;
+    if (!date) return; //PREVENTS EMPTY REQUESTS
 
     try {
+    //SEND REQUEST TO BACKEND API WITH RESOURCE AND DATE
     const res = await fetch(`${URL}/slots?resource=${encodeURIComponent(resource)}&date=${date}`);
 
     console.log("Response status:", res.status);
@@ -32,15 +36,18 @@ function Home() {
     const data = await res.json();
     console.log("Data:", data);
 
+    //HANDLE SERVER ERRORS
     if (!res.ok) {
       console.error("Server error:", data);
       setSlots([]);
       return;
     }
 
+    //UPDATES SLOT STATE WITH WITH AVAILABLE TIMES
     setSlots(Array.isArray(data.availableSlots) ? data.availableSlots : []);
 
     } catch (error) {
+      //HANDLE NETWORK ERRORS
       console.error("FETCH ERROR:", error);
       setSlots([null]);
       alert('Failed to load slots')
@@ -91,7 +98,7 @@ function Home() {
         />
       </div>
         
-        {/* BOOKING FORM */}
+        {/* BOOKING FORM ONLY AVAILABLE AFTER USER SELECTS A TIME */}
         {selectedTime && (
           <div className='border-t border-gray-300 pt-6'>
             <h2 className='font-semibold mb-2'>Your Details</h2>
@@ -122,6 +129,8 @@ function Home() {
       <div className='bg-white shadow-xl rounded-2xl p-6 h-fit'>
 
         <h2 className='text-xl font-bold mb-4'>Your Bookings</h2>
+
+        {/* RELOADS WHEN REFRESHKEY CHANGES */}
         <BookingList refreshKey={refreshKey} />
       </div>
 
