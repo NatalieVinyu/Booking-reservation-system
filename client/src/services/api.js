@@ -1,5 +1,7 @@
 // SERVICES/API.JS
-const URL = "/api/bookings";
+const URL = "https://booking-reservation-system-an1k.onrender.com/api/bookings";
+
+export default URL
 
 export const getBookings = () => fetch(URL).then(r => r.json());
 

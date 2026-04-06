@@ -8,7 +8,7 @@ import ResourceSelector from '../components/ResourceSelector';
 import Slots from '../components/Slots';
 
 //BASE API ENDPOINT FOR BOOKINGS
-const URL = "/api/bookings";
+const URL = "https://booking-reservation-system-an1k.onrender.com/api/bookings";
 
 function Home() {
   // STATE MANAGEMENT - STORES USER SELECTIONS AND DATA
