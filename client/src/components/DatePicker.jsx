@@ -1,8 +1,22 @@
 import React from 'react'
 
 function DatePicker({ date, setDate, clearSlots }) {
+
+  const today = new Date().toISOString().split("T")[0];
+
+  const isWeekend = (dateStr) => {
+    const d = new Date(dateStr);
+    const day = d.getDay();
+    return day === 0 || day === 6;
+  }
+
   const handleChange = (e) => {
     const newDate = e.target.value;
+
+    if (isWeekend(newDate)) {
+      alert("Clinic is closed on weekends");
+      return;
+    }
 
     setDate(newDate);
 
@@ -18,6 +32,7 @@ function DatePicker({ date, setDate, clearSlots }) {
 
       <input 
         type="date"
+        min={today}
         value={date}
         onChange={handleChange}
         className='w-full p-2 border rounded' />
