@@ -3,6 +3,9 @@ const app = express();
 const path = require('path');
 const cors = require('cors');
 
+//SET PORT FROM RENDER OR DEFAULT TO 3000
+const PORT = process.env.PORT || 3000;
+
 //MIDDLEWARE
 app.use(cors());
 app.use(express.json());
@@ -23,6 +26,6 @@ app.post('/submit-form', (req, res) => {
 })
 
 //START SERVER
-app.listen(3000, () => {
-  console.log('Server is running on port http://localhost:3000');
+app.listen(PORT, () => {
+  console.log(`Server is running on port http://localhost:${PORT}`);
 });
