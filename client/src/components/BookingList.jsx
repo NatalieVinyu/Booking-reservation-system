@@ -16,7 +16,7 @@ function BookingList({ refreshKey }) {
   //FETCH ALL BOOKINGS FROM BACKEND
   const fetchBookings = async () => {
   try {
-    const res = await fetch('/api/bookings');
+    const res = await fetch(URL);
     const data = await res.json();
 
     console.log("Bookings:", data)
